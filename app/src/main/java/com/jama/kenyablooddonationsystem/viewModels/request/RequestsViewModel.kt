@@ -27,15 +27,17 @@ class RequestsViewModel: ViewModel() {
     val closeQrCode: LiveData<Boolean> = Transformations.map(requestRepository.closeQrCode) {
         it
     }
+    val acceptedRequestRefresh: LiveData<Boolean> = Transformations.map(requestRepository.acceptedRequestRefresh) {
+        it
+    }
     private var callListenRequests = true
 
     fun listenToRequests(fragmentActivity: FragmentActivity) {
+        println("Geofire view called")
         viewModelScope.launch {
-            if (callListenRequests) {
-                val latlng = GetUserLocation(fragmentActivity).getLastLocation()
-                requestRepository.listenToRequests(latlng)
-                callListenRequests = false
-            }
+            val latlng = GetUserLocation(fragmentActivity).getLastLocation()
+            requestRepository.listenToRequests(latlng)
+            callListenRequests = false
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jama.kenyablooddonationsystem.R
 import com.jama.kenyablooddonationsystem.ui.home.adapters.EventAdapter
 import com.jama.kenyablooddonationsystem.viewModels.event.EventViewModel
+import kotlinx.android.synthetic.main.accepted_requests_fragement.view.*
 import kotlinx.android.synthetic.main.fragment_requests.*
 import kotlinx.android.synthetic.main.fragment_requests.view.recyclerView
 
@@ -29,7 +30,7 @@ class EventsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragementView = inflater.inflate(R.layout.fragment_events, container, false)
+        fragementView = inflater.inflate(R.layout.accepted_requests_fragement, container, false)
 
         eventViewModel = activity.run {
             ViewModelProviders.of(this!!)[EventViewModel::class.java]
@@ -46,6 +47,14 @@ class EventsFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        fragementView.swipeRefreshLayout.setOnRefreshListener {
+            eventViewModel.listenToEvents(activity!!)
+        }
+
+        eventViewModel.acceptedRequestRefresh.observe(this, Observer {
+            fragementView.swipeRefreshLayout.isRefreshing = it
+        })
 
         eventViewModel.eventModelList.observe(this, Observer {
             eventAdapter.insertData(it)

@@ -16,15 +16,16 @@ class EventViewModel: ViewModel() {
     val eventModelList: LiveData<MutableList<EventModel>> = Transformations.map(eventRepository.eventModelList) {
         it.asReversed()
     }
+    val acceptedRequestRefresh: LiveData<Boolean> = Transformations.map(eventRepository.acceptedRequestRefresh) {
+        it
+    }
     private var callListenEvent = true
 
     fun listenToEvents(fragmentActivity: FragmentActivity) {
         viewModelScope.launch {
-            if (callListenEvent) {
-                val latlng = GetUserLocation(fragmentActivity).getLastLocation()
-                eventRepository.listenToEvents(latlng)
-                callListenEvent = false
-            }
+            val latlng = GetUserLocation(fragmentActivity).getLastLocation()
+            eventRepository.listenToEvents(latlng)
+            callListenEvent = false
         }
     }
 

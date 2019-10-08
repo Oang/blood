@@ -22,6 +22,7 @@ class RequestRepository {
     private val databaseAcceptedRequestRef = database.getReference("acceptedRequests")
     private val databaseDonationDetiailsRef = database.getReference("donationDetails")
     private val regexUtil = RegexUtil()
+    private var closeListener = false
     private lateinit var geoFire: GeoFire
     private lateinit var geoQuery: GeoQuery
     var requestModelList: MutableLiveData<MutableList<RequestModel>> =
@@ -31,6 +32,7 @@ class RequestRepository {
     var showSnackbar: MutableLiveData<String> = MutableLiveData("")
     var showProgressbar: MutableLiveData<Boolean> = MutableLiveData(false)
     val closeQrCode: MutableLiveData<Boolean> = MutableLiveData(false)
+    val acceptedRequestRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
@@ -74,11 +76,22 @@ class RequestRepository {
     }
 
     fun listenToRequests(latlng: Map<String, Double>) {
+        println("Geofire called")
+        if (closeListener) {
+            requestModelList.value = mutableListOf()
+            geoQuery.removeAllListeners()
+            println("Geofire removed")
+            closeListener = false
+        }
         geoFire = GeoFire(requestRef())
         geoQuery = geoFire.queryAtLocation(GeoLocation(latlng["lng"]!!, latlng["lat"]!!), 10.0)
         geoQuery.addGeoQueryEventListener(object : GeoQueryEventListener {
             override fun onKeyEntered(key: String, location: GeoLocation) {
                 getRequest(key, true)
+                closeListener = true
+                CoroutineScope(Dispatchers.Main).launch {
+                    acceptedRequestRefresh.value = false
+                }
             }
 
             override fun onKeyExited(key: String) {}
@@ -101,6 +114,9 @@ class RequestRepository {
             override fun onDataChange(p0: DataSnapshot) {
                 p0.children.forEach {
                     getRequest(it.key!!, false)
+                }
+                CoroutineScope(Dispatchers.Main).launch {
+                    acceptedRequestRefresh.value = false
                 }
             }
 

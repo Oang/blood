@@ -8,6 +8,9 @@ import com.firebase.geofire.GeoQueryEventListener
 import com.google.firebase.database.*
 import com.jama.kenyablooddonationsystem.models.EventModel
 import com.jama.kenyablooddonationsystem.repository.firebase.firebaseAuth.AuthenticationRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EventsRepository {
 
@@ -17,8 +20,10 @@ class EventsRepository {
     private val eventGeoFireRef = database.getReference("geofire/events")
     private lateinit var geoFire: GeoFire
     private lateinit var geoQuery: GeoQuery
+    private var closeListener = false
     var eventModelList: MutableLiveData<MutableList<EventModel>> =
         MutableLiveData(mutableListOf())
+    val acceptedRequestRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
@@ -39,11 +44,20 @@ class EventsRepository {
     }
 
     fun listenToEvents(latlng: Map<String, Double>) {
+        if (closeListener) {
+            eventModelList.value = mutableListOf()
+            geoQuery.removeAllListeners()
+            closeListener = false
+        }
         geoFire = GeoFire(eventGeoFireRef)
         geoQuery = geoFire.queryAtLocation(GeoLocation(latlng["lng"]!!, latlng["lat"]!!), 10.0)
         geoQuery.addGeoQueryEventListener(object : GeoQueryEventListener {
             override fun onKeyEntered(key: String, location: GeoLocation) {
                 getEvent(key)
+                closeListener = true
+                CoroutineScope(Dispatchers.Main).launch {
+                    acceptedRequestRefresh.value = false
+                }
             }
 
             override fun onKeyExited(key: String) {}

@@ -1,14 +1,10 @@
 package com.jama.kenyablooddonationsystem.ui.home
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.jama.kenyablooddonationsystem.R
 import com.jama.kenyablooddonationsystem.repository.firebase.firebaseAuth.AuthenticationRepository
 import com.jama.kenyablooddonationsystem.ui.auth.LoginActivity
@@ -27,6 +23,7 @@ open class HomeActivity : AppCompatActivity() {
         supportActionBar?.title = authenticationRepository.getFirebaseUser()!!.displayName
 
         viewPager.adapter = HomeActivityAdapter(supportFragmentManager)
+        viewPager.offscreenPageLimit = 4
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_home_red_24dp)
         tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_event_red_24dp)

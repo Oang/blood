@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jama.kenyablooddonationsystem.R
 import com.jama.kenyablooddonationsystem.ui.home.adapters.RequestsAdapter
 import com.jama.kenyablooddonationsystem.viewModels.request.RequestsViewModel
-import kotlinx.android.synthetic.main.fragment_requests.view.*
+import kotlinx.android.synthetic.main.accepted_requests_fragement.view.*
 
 class RequestsFragment : Fragment() {
 
@@ -28,7 +28,7 @@ class RequestsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragementView = inflater.inflate(R.layout.fragment_requests, container, false)
+        fragementView = inflater.inflate(R.layout.accepted_requests_fragement, container, false)
         requestsViewModel = activity.run {
             ViewModelProviders.of(this!!)[RequestsViewModel::class.java]
         }
@@ -45,6 +45,14 @@ class RequestsFragment : Fragment() {
             adapter = viewAdapter
             addItemDecoration(DividerItemDecoration(fragementView.context, DividerItemDecoration.VERTICAL))
         }
+
+        fragementView.swipeRefreshLayout.setOnRefreshListener {
+            requestsViewModel.listenToRequests(activity!!)
+        }
+
+        requestsViewModel.acceptedRequestRefresh.observe(this, Observer {
+            fragementView.swipeRefreshLayout.isRefreshing = it
+        })
 
         requestsViewModel.requestModelList.observe(this, Observer {
             requestsAdapter.insertData(it)

@@ -8,6 +8,7 @@ import com.jama.kenyablooddonationsystem.ui.home.fragments.RequestsFragment
 import com.jama.kenyablooddonationsystem.ui.home.fragments.AcceptedRequestsFragment
 import com.jama.kenyablooddonationsystem.ui.home.fragments.ProfileFragment
 
+@Suppress("DEPRECATION")
 class HomeActivityAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         return when(position) {

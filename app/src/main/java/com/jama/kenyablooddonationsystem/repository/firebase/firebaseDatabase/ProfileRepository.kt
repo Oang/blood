@@ -5,6 +5,9 @@ import com.google.firebase.database.*
 import com.jama.kenyablooddonationsystem.models.DonationDetailsModel
 import com.jama.kenyablooddonationsystem.models.UserModel
 import com.jama.kenyablooddonationsystem.repository.firebase.firebaseAuth.AuthenticationRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProfileRepository {
 
@@ -16,6 +19,7 @@ class ProfileRepository {
         MutableLiveData(UserModel())
     var donationDetailsModel: MutableLiveData<DonationDetailsModel> =
         MutableLiveData(DonationDetailsModel())
+    val acceptedRequestRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
@@ -52,6 +56,9 @@ class ProfileRepository {
                 val donationDetails = p0.getValue(DonationDetailsModel::class.java)
                 donationDetailsModel.value = donationDetails
                 donationDetailsModel.notifyObserver()
+                CoroutineScope(Dispatchers.Main).launch {
+                    acceptedRequestRefresh.value = false
+                }
             }
         })
     }

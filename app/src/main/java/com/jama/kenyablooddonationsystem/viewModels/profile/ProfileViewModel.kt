@@ -19,6 +19,9 @@ class ProfileViewModel: ViewModel() {
     val donationDetailsModel: LiveData<DonationDetailsModel> = Transformations.map(profileRepository.donationDetailsModel) {
         it
     }
+    val acceptedRequestRefresh: LiveData<Boolean> = Transformations.map(profileRepository.acceptedRequestRefresh) {
+        it
+    }
 
     fun getUserProfile() {
         viewModelScope.launch(Dispatchers.IO) {
