@@ -20,6 +20,12 @@ This project aims to develop a [web-based application](https://github.com/jama52
 - [Leaflet](https://leafletjs.com/)
 - [Google Material IO](https://material.io/develop/android/)
 
+## Demos
+
+Demo 1 | Demo 2 | Demo 3
+------------ | ------------- | -------------
+<img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image.gif" alt="alt text" height="500px"> | <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image2.gif" alt="alt text" height="500px"> | <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image3.gif" height="500px">
+
 ## Installation
 Before installation, you must have installed the latest version of [Android Studio](https://developer.android.com/studio) for this project to works on your machine
 
