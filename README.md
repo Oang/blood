@@ -22,7 +22,7 @@ This project aims to develop a [web-based application](https://github.com/jama52
 
 ## Demos
 
-Demo 1 | Demo 2 | Demo 3
+Accessing the app | Viewing each activity | Registering after a donation at the hospital
 ------------ | ------------- | -------------
 <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image.gif" alt="alt text" height="500px"> | <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image2.gif" alt="alt text" height="500px"> | <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image3.gif" height="500px">
 
