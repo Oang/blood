@@ -1,8 +1,8 @@
 # Blood Donation System Android
 
-This project aims to develop a [web-based application](https://github.com/jama5262/blood-donation-system-web) for the hospital and a mobile base application for donors that will reduce the time taken to get a specific blood type e.g. A+ from registered donors within a geographical area in case of emergencies and in the process store data in a centralized database that is accessible to all hospitals.
+This project aims to develop a [web-based application] for the hospital and a mobile base application for donors that will reduce the time taken to get a specific blood type e.g. A+ from registered donors within a geographical area in case of emergencies and in the process store data in a centralized database that is accessible to all hospitals.
 
-#### The [web-based application](https://github.com/jama5262/blood-donation-system-web) is available with is only accessible to hospitals and admin
+#### The [web-based application] is available with is only accessible to hospitals and admin
 
 # Table of Contents
 - [Built With](#built-with)
@@ -24,15 +24,15 @@ This project aims to develop a [web-based application](https://github.com/jama52
 
 Accessing the app | Viewing each activity | Registering after a donation at the hospital
 ------------ | ------------- | -------------
-<img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image.gif" alt="alt text" height="500px"> | <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image2.gif" alt="alt text" height="500px"> | <img src="https://github.com/jama5262/blood-donation-system-android/blob/develop/gif/image3.gif" height="500px">
+<img src="https://github.com/Oang/blood-donation-system-android/blob/develop/gif/image.gif" alt="alt text" height="500px"> | <img src="https://github.com/Oang/blood-donation-system-android/blob/develop/gif/image2.gif" alt="alt text" height="500px"> | <img src="https://github.com/Oang/blood-donation-system-android/blob/develop/gif/image3.gif" height="500px">
 
 ## Installation
 Before installation, you must have installed the latest version of [Android Studio](https://developer.android.com/studio) for this project to works on your machine
 
 ### Cloning
-After the installations, clone this repo to your local machine using `https://github.com/jama5262/blood-donation-system-android.git`
+After the installations, clone this repo to your local machine using `https://github.com/Oang/blood-donation-system-android.git`
 ```
-git clone https://github.com/jama5262/blood-donation-system-android.git
+git clone https://github.com/Oang/blood-donation-system-android.git
 ```
 After clonning open it on Android Studio
 
@@ -46,21 +46,21 @@ To start using the app, simply connect you physical device to your machine or an
 #### Donor Account
 You can sign up as a new donor and use that account
 
-Visit the [Blood Donation System Web Repo](https://github.com/jama5262/blood-donation-system-web) to access the application as a hospital or an admin
+Visit the [Blood Donation System Web Repo](https://github.com/Oang/blood-donation-system-web) to access the application as a hospital or an admin
 
 ## Support
 
 Reach out to me at one of the following places!
 
-- Email at jama3137@gmail.com
-- Twitter [timedjama5262](https://twitter.com/timedjama5262)
+- Email at junanaphil@gmail.com
+
 
 ## License
 
 ```
 MIT License
 
-Copyright (c) 2019 Jama Mohamed
+Copyright (c) 2019 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
